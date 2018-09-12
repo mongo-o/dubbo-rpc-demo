@@ -2,6 +2,7 @@ package demo.dubbo.consumer.controller;
 
 import demo.ayl.dubbo.provider.api.UserServiceI;
 import demo.ayl.dubbo.provider.dao.User;
+import demo.dubbo.consumer.interceptor.NeedLogin;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -21,8 +22,10 @@ public class OrderServiceController {
     private UserServiceI userServiceImpl;
 
     @RequestMapping(value = "/test", method = RequestMethod.POST)
+    @NeedLogin(true)
     public String test(@RequestBody User user) {
         return userServiceImpl.testUser(user);
     }
+
 
 }
